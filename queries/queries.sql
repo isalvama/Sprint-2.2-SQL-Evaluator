@@ -5,11 +5,10 @@ SELECT DISTINCT nombre FROM producto;
 SELECT nombre, precio FROM producto;
 
 -- 3. Llista totes les columnes de la taula producto.
-SHOW COLUMNS FROM producto;
+DESCRIBE producto;
 
 -- 4. Llista el nom dels productes, el preu en euros (precio_eur) i el preu en dòlars estatunidencs (precio_usd) amb un tipus de canvi de 1 € = 1 $.
-SELECT nombre, productos
-FROM producto;
+
 
 -- 5. Llista el nom dels productes, el preu en euros i el preu en dòlars estatunidencs (amb un tipus de canvi de 1 € = 1,1 $ i arrodonint el resultat a dues xifres decimals). Utilitza els següents àlies per a les columnes: nom del producte, euros, dòlars.
 
