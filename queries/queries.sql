@@ -1,4 +1,4 @@
--- 1. Llista el nom de tots els productes que hi ha en la taula producto.
+--- 1. Llista el nom de tots els productes que hi ha en la taula producto.
 SELECT DISTINCT nombre FROM tienda.producto;
 
 -- 2. Llista els noms i els preus de tots els productes de la taula producto.
@@ -9,28 +9,28 @@ SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'producto'
 
 -- 4. Llista el nom dels productes, el preu en euros (precio_eur) i el preu en dòlars estatunidencs (precio_usd) amb un tipus de canvi de 1 € = 1 $.
 SELECT nombre, precio
-AS Precio_Euros,
-precio * 1 AS Precio_Dolares
+AS precio_eur,
+precio * 1 AS precio_usd
 FROM tienda.producto;
 
 -- 5. Llista el nom dels productes, el preu en euros i el preu en dòlars estatunidencs (amb un tipus de canvi de 1 € = 1,1 $ i arrodonint el resultat a dues xifres decimals). Utilitza els següents àlies per a les columnes: nom del producte, euros, dòlars.
-SELECT nombre, precio AS euros, ROUND(precio * 1,1) AS dòlars FROM tienda.producto;
+SELECT nombre, precio AS euros, ROUND(precio * 1.1) AS dòlars FROM tienda.producto;
 
 -- 6. Llista els noms (nombre) i els preus de tots els productes de la taula producto, convertint els noms a majúscula.
-SELECT UCASE(nombre), precio
+SELECT UCASE(nombre) AS nombre, precio
 FROM tienda.producto;
 
 -- 7. Llista els noms (nombre) i els preus (precio) dels productes de la taula producto, convertint els noms a minúscula.
-SELECT LCASE(nombre), precio FROM tienda.producto;
+SELECT LCASE(nombre) AS nombre, precio FROM tienda.producto;
 
 -- 8. Llista el nom de tots els fabricants en una columna, i en una altra columna obtingui en majúscules els dos primers caràcters del nom del fabricant (iniciales).
-SELECT nombre, UCASE(LEFT(nombre, 2)) AS INICIALES FROM tienda.fabricante;
+SELECT nombre, UCASE(LEFT(nombre, 2)) AS iniciales FROM tienda.fabricante;
 
 -- 9. Llista els noms i els preus dels productes, arrodonint el valor del preu (precio)
-SELECT nombre, ROUND(precio * 1) FROM tienda.producto;
+SELECT nombre, ROUND(precio * 1) AS precio FROM tienda.producto;
 
 -- 10. Llista els noms i els preus de tots els productes (precio truncado) de la taula producto, truncant el valor del preu per a mostrar-lo sense cap xifra decimal.
-SELECT nombre, TRUNCATE(precio, 0) FROM tienda.producto;
+SELECT nombre, TRUNCATE(precio, 0) AS precio FROM tienda.producto;
 
 -- 11. Mostra una llista amb els codis dels fabricants que apareixen a la taula producto, incloent possibles repeticions.
 SELECT codigo_fabricante FROM tienda.producto;
@@ -63,11 +63,10 @@ SELECT nombre, precio FROM tienda.producto ORDER BY precio DESC LIMIT 1;
 SELECT nombre FROM tienda.fabricante where codigo = 2;
 
 -- 21. Retorna una llista amb el nom del producte, preu i nom de fabricant (nombre del fabricante) de tots els productes de la base de dades.
-SELECT p.nombre, p.precio, f.nombre FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo;
+SELECT p.nombre, p.precio, f.nombre AS nombre FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo;
 
 -- 22. Llista tots els productes amb nom, preu i nom del fabricant (nombre del fabricante) ordenats alfabèticament.
-SELECT p.nombre, p.precio, f.nombre FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo ORDER BY p.nombre;
-SELECT p.nombre, p.precio, f.nombre FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo ORDER BY f.nombre;
+SELECT p.nombre, p.precio, f.nombre AS nombre FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo ORDER BY p.nombre;
 
 -- 23. Retorna una llista amb el codi del producte, nom del producte, codi del fabricant (codigo fabricante) i nom del fabricant (nombre fabricante), de tots els productes de la base de dades.
 SELECT p.codigo, p.nombre, p.codigo_fabricante, f.nombre FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo;
