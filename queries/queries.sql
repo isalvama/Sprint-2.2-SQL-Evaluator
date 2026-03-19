@@ -69,7 +69,7 @@ SELECT p.nombre, p.precio, f.nombre AS 'nombre del fabricante' FROM tienda.produ
 SELECT p.nombre, p.precio, f.nombre AS 'nombre del fabricante' FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo ORDER BY p.nombre DESC;
 
 -- 23. Retorna una llista amb el codi del producte, nom del producte, codi del fabricant (codigo fabricante) i nom del fabricant (nombre fabricante), de tots els productes de la base de dades.
-SELECT p.codigo, p.nombre, p.codigo_fabricante AS codigo fabricante, f.nombre AS 'nombre fabricante' FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo;
+SELECT p.codigo, p.nombre, p.codigo_fabricante AS 'codigo fabricante', f.nombre AS 'nombre fabricante' FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo;
 
 -- 24. Retorna el nom, el preu i el nom del fabricant (fabricante), del producte més barat.
 SELECT p.nombre, p.precio, f.nombre AS fabricant FROM tienda.producto p JOIN tienda.fabricante f on f.codigo = p.codigo_fabricante ORDER BY p.precio LIMIT 1;
