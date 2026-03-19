@@ -48,13 +48,13 @@ SELECT nombre FROM tienda.fabricante ORDER BY nombre DESC;
 SELECT nombre, precio FROM tienda.producto ORDER BY nombre, precio DESC;
 
 -- 16. Retorna una llista amb les 5 primeres files de la taula fabricante.
-SELECT * FROM tienda.fabricante LIMIT 5;
+SELECT codigo, nombre FROM tienda.fabricante LIMIT 5;
 
 -- 17. Retorna una llista amb 2 files a partir de la quarta fila de la taula fabricante. La quarta fila també s'ha d'incloure en la resposta.
-SELECT * FROM tienda.fabricante LIMIT 3, 2;
+SELECT codigo, nombre FROM tienda.fabricante LIMIT 3, 2;
 
 -- 18. Llista el nom i el preu del producte més barat. (Utilitza solament les clàusules ORDER BY i LIMIT).
-SELECT nombre, precio FROM tienda.producto ORDER BY precio ASC LIMIT 1;
+SELECT nombre, precio FROM tienda.producto ORDER BY precio LIMIT 1;
 
 -- 19. Llista el nom i el preu del producte més car. (Utilitza solament les clàusules ORDER BY i LIMIT).
 SELECT nombre, precio FROM tienda.producto ORDER BY precio DESC LIMIT 1;
@@ -69,7 +69,7 @@ SELECT p.nombre, p.precio, f.nombre AS 'nombre del fabricante' FROM tienda.produ
 SELECT p.nombre, p.precio, f.nombre AS 'nombre del fabricante' FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo ORDER BY p.nombre;
 
 -- 23. Retorna una llista amb el codi del producte, nom del producte, codi del fabricant (codigo fabricante) i nom del fabricant (nombre fabricante), de tots els productes de la base de dades.
-SELECT p.codigo, p.nombre, p.codigo_fabricante, f.nombre AS 'nombre fabricante' FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo;
+SELECT p.codigo, p.nombre, p.codigo_fabricante AS codigo_fabricante, f.nombre AS 'nombre fabricante' FROM tienda.producto p JOIN tienda.fabricante f ON p.codigo_fabricante = f.codigo;
 
 -- 24. Retorna el nom, el preu i el nom del fabricant (fabricante), del producte més barat.
 SELECT p.nombre, p.precio, f.nombre AS fabricant FROM tienda.producto p JOIN tienda.fabricante f on f.codigo = p.codigo_fabricante ORDER BY p.precio LIMIT 1;
@@ -124,6 +124,6 @@ SELECT DISTINCT p.codigo, p.nombre, p.precio, p.codigo_fabricante FROM tienda.pr
 
 -- 41. Llista tots els productes del fabricant Asus que tenen un preu superior al preu mitjà de tots els seus productes.
 SELECT DISTINCT p.codigo, p.nombre, p.precio, p.codigo_fabricante
-FROM tienda.producto p, tienda.fabricante f
+FROM tienda.producto p JOIN tienda.fabricante f ON f.codigo = p.codigo_fabricante
 WHERE f.nombre = 'Asus' AND p.precio > (SELECT AVG(p2.precio) FROM tienda.producto p2 JOIN tienda.fabricante f on f.codigo = p2.codigo_fabricante WHERE f.nombre = 'Asus');
 
